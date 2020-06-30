@@ -1,0 +1,58 @@
+const db = require('../database');
+
+
+function getUsers() {
+    return db.User.findAll();
+}
+
+function createUser(user) {
+    return db.User.bulkCreate([
+        { ...user }
+    ])
+}
+
+async function updateUser(user) {
+    const { id, email, ...data } = user
+    const options = []
+    if(id) {
+        options.push({id: id})
+    }
+    if(email) {
+        options.push({email: email})
+    }
+    const result = await db.User.update({ ...data }, { where: {
+        [db.Sequelize.Op.or]: options
+    } })
+
+    return result[0] > 0
+}
+
+/**
+ * 
+ * @param { String } name 
+ */
+function findUserByName(name) {
+    return db.User.findAll({
+        where: {
+            [db.Sequelize.Op.or]: [
+                {
+                    firstName: {
+                        [db.Sequelize.Op.substring]: name
+                    }
+                },
+                {
+                    lastName: {
+                        [db.Sequelize.Op.substring]: name
+                    }
+                }
+            ]
+        }
+    })
+}
+
+module.exports = {
+    getUsers,
+    createUser,
+    updateUser,
+    findUserByName
+}
