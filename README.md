@@ -118,3 +118,10 @@ npx sequelize db:migrate
 ├── public.key                                      # Validate tokens
 └── README.md         
 ```
+
+## Git push to existing remote
+```
+git remote add origin https://github.com/lieutandat/test.git
+git push -u origin master
+
+```
