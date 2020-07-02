@@ -2,7 +2,12 @@ const db = require('../database');
 
 
 function getUsers() {
-    return db.User.findAll();
+    return db.User.findAll({ 
+        include: [{
+            model: db.Blog,
+            as: 'blogs'
+        }]
+    });
 }
 
 function createUser(user) {

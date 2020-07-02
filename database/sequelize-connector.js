@@ -1,21 +1,7 @@
 const { Sequelize } = require('sequelize');
 
 const config = require('../configs');
-
-const sequelize = new Sequelize(
-    config.database.db,
-    config.database.username,
-    config.database.password,
-    {
-        host: config.database.host,
-        dialect: config.database.dialect, /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
-        port: config.database.port,
-        pool: {
-            ...config.database.pool
-        },
-        logging: config.database.logging
-    },
-);
+const sequelize = new Sequelize(config.database);
 
 const connect = async () => {
     try {

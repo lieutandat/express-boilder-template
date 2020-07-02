@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../sequelize-connector');
 
-const User = sequelize.define('User', {
+const User = sequelize.define('Users', {
   id: {
     primaryKey: true,
     type: DataTypes.UUID,
@@ -17,7 +17,11 @@ const User = sequelize.define('User', {
 }, {});
 
 User.associate = function (models) {
-  // associations can be defined here
+  User.hasMany(models.Blog, {
+    as: 'blogs',
+    foreignKey: 'writer',
+    sourceKey: 'id'
+  })
 };
 
 User.prototype.toJSON =  function () {
