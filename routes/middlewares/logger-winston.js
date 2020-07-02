@@ -27,36 +27,47 @@ winston.configure({
 	]
 });
 
+function sendErrorMessage(req, res, { status, error, devMessage }) {
+	winston.info('Server error with route: ' + req.url)
+	winston.error(error.stack || error);
+	const { language = 'en' } = req.headers
+	if (NODE_ENV === 'production') {
+		return res.status(status).send({
+			error: true,
+			message: getErrorMessages(error.code, language)
+		});
+	} else {
+		return res.status(status).send({
+			error: true,
+			message: getErrorMessages(error.code, language),
+			devMessage: devMessage.replace(/\"/g, `'`)
+		});
+	}
+}
 
-const loggerMiddleWare = (err, req, res, next) => {
+const loggerMiddleWare = (error, req, res, next) => {
 	try {
-		const { language = 'en' } = req.headers
-		if (err && err.name === 'UnauthorizedError') {
-			res.status(401).end();
-		} else if (err) {
-			winston.info('Server error with route: ' + req.url)
-			winston.error(err.stack || err);
-			if (NODE_ENV === 'production') {
-				res.status(500).send({
-					error: true,
-					message: getErrorMessages(err.code, language)
-				});
+		if (error && error.name === 'UnauthorizedError') {
+			return res.status(401).end();
+		} else if (error && error.name === 'SequelizeForeignKeyConstraintError') {
+			const result = /(table \"[\w.]+\")/g.exec(error.message)
+			if(result && result.length > 0) {
+				const devMessage = `Your insert value does not match reference to ${result[0]}`
+				return sendErrorMessage(req, res, {status: 500, error, devMessage})
 			} else {
-				res.status(500).send({
-					error: true,
-					message: getErrorMessages(err.code, language),
-					devMessage: err.message
-				});
+				return sendErrorMessage(req, res, {status: 500, error, devMessage: error.message})
 			}
+		} else if (error) {
+			return sendErrorMessage(req, res, {status: 500, error, devMessage: error.message})
 		} else {
 			res.status(405).send();
 		}
 	} catch (error) {
 		console.log('INTERNAL_SERVER_ERROR', error)
-	}
-	
-	
+	}	
 };
+
+
 const getModulePath = function(callingModule) {
 	const parts = callingModule.filename.split(path.sep);
 	return path.join(parts[parts.length - 2], parts.pop());
