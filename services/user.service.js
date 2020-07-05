@@ -14,10 +14,12 @@ function getUsersService() {
         password: String
     }} user 
  */
-function createUserService(user) {
-
+async function createUserService(user) {
+    const existingUser = await UserRespository.findUserBy({ email: user.email });
+    if(existingUser) {
+        throw { code: 5100, status: 400, message: `Existing user's email`}
+    }
     const passwordData = HashPasswordUtils.generateHashPassword(user.password);
-
     return UserRespository.createUser({
         firstName: user.firstName,
         lastName: user.lastName,

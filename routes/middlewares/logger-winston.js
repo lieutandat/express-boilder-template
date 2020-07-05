@@ -57,6 +57,8 @@ const loggerMiddleWare = (error, req, res, next) => {
 			} else {
 				return sendErrorMessage(req, res, {status: 500, error, devMessage: error.message})
 			}
+		} else if (error && error.status && typeof error.status === 'number') {
+			return sendErrorMessage(req, res, {status: error.status, error, devMessage: error.message})
 		} else if (error) {
 			return sendErrorMessage(req, res, {status: 500, error, devMessage: error.message})
 		} else {

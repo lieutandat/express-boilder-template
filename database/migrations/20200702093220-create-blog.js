@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING(255)
       },
       body: {
-        type: Sequelize.STRING('max')
+        type: Sequelize.STRING(255)
       },
       createdAt: {
         allowNull: false,

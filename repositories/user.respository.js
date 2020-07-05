@@ -55,9 +55,25 @@ function findUserByName(name) {
     })
 }
 
+/**
+ * 
+ * @param {{email: String, id: String}} query 
+ */
+function findUserBy(query) {
+    Object.keys(query).forEach(key => {
+        if(query[key] === undefined) {
+            delete query[key]
+        }
+    })
+    return db.User.findOne({
+        where: query
+    })
+}
+
 module.exports = {
     getUsers,
     createUser,
     updateUser,
-    findUserByName
+    findUserByName,
+    findUserBy
 }
