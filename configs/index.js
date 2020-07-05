@@ -8,7 +8,7 @@ const config = {
         host: process.env.SQL_HOST,
         port: process.env.SQL_PORT,
         dialect: process.env.SQL_DIALECT,
-        logging: process.env.SQL_LOG === 'true',
+        logging: process.env.SQL_LOG === 'true' ? console.log : false,
         pool: {
             max: Number(process.env.SQL_POOL_LIMIT),
             min: 0,
