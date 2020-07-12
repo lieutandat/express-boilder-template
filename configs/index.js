@@ -33,5 +33,5 @@ const config = {
     }
 }
 
-console.log(config)
+console.debug(config)
 module.exports = config
