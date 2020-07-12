@@ -45,9 +45,13 @@ function findUserByNameService(name) {
     return UserRespository.findUserByName(name);
 }
 
+function deleteUserService({ id, email }) {
+    return UserRespository.deleteUser({ id, email })
+}
 module.exports = {
     getUsersService,
     createUserService,
     updateUserService,
-    findUserByNameService
+    findUserByNameService,
+    deleteUserService
 }

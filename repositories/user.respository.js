@@ -11,9 +11,7 @@ function getUsers() {
 }
 
 function createUser(user) {
-    return db.User.bulkCreate([
-        { ...user }
-    ])
+    return db.User.create(user)
 }
 
 async function updateUser(user) {
@@ -60,12 +58,13 @@ function findUserByName(name) {
  * @param {{email: String, id: String}} query 
  */
 function findUserBy(query) {
-    Object.keys(query).forEach(key => {
-        if(query[key] === undefined) {
-            delete query[key]
-        }
-    })
     return db.User.findOne({
+        where: query
+    })
+}
+
+function deleteUser(query) {
+    return db.User.destroy({
         where: query
     })
 }
@@ -75,5 +74,6 @@ module.exports = {
     createUser,
     updateUser,
     findUserByName,
-    findUserBy
+    findUserBy,
+    deleteUser
 }

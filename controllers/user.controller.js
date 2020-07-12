@@ -48,6 +48,19 @@ class UserController extends BaseController {
         }
     })
 
+    deleteUser = this.asyncHandler(async (req, res) => {
+        const { id, email } = req.query;
+        const result = await userService.deleteUserService({ id, email })
+        return this.ok(res, result)
+    })
+
+    validateDeleteUser = celebrate({
+        query: {
+            id: Joi.string(),
+            email: Joi.string()
+        }
+    })
+
 }
 
 module.exports = UserController
