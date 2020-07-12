@@ -13,6 +13,11 @@
 - API versioning
 - Request Validation
 
+## Generate private/public key
+```shell
+    ssh-keygen -t rsa -b 2048 -q -N "12345" -m PEM -f private.key
+    ssh-keygen -y -f ./private.key > ./public.key
+```
 ## Getting Started
 ```shell
 # Create environment variables in .env
