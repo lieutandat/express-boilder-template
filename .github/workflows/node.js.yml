@@ -36,7 +36,7 @@ jobs:
         SQL_DB: "db"
         SQL_USER: "root"
         SQL_PASS: "pass"
-        SQL_DIALECT: mysql
+        SQL_DIALECT: "mysql"
         SQL_POOL_LIMIT: 100
         SQL_LOG: "false"
     - run: ssh-keygen -t rsa -b 2048 -q -N "12345" -m PEM -f private.key
