@@ -4,7 +4,7 @@ const userRouter = require('./routers/users.router');
 const blogRouter = require('./routers/blogs.router');
 const authenRouter = require('./routers/authen.router');
 
-router.use('/', authenRouter)
+router.use('/authen', authenRouter)
 router.use('/user', userRouter);
 router.use('/blog', blogRouter);
 

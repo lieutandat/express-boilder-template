@@ -12,5 +12,5 @@ userRouter.get('/all', userController.getUsers);
 userRouter.post('/register', userController.createUserValidate, userController.createUser);
 userRouter.put('/update', userController.updateUser);
 userRouter.get('/findByName', userController.findUserByNameValidate, userController.findUserByName);
-
+userRouter.delete('/delete', userController.validateDeleteUser, userController.deleteUser)
 module.exports = userRouter

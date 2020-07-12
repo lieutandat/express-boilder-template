@@ -12,8 +12,11 @@ class AuthenController extends BaseController {
 
     login = this.asyncHandler(async (req, res) => {
         const { email, password } = req.body
-        const users = await authenService.loginService(email, password);
-        return this.ok(res, users);
+        const token = await authenService.loginService(email, password);
+        if(token) {
+            return this.ok(res, { token: token })
+        } 
+        return this.custom(res, 401, false)
     })
 
     loginValidate = celebrate({

@@ -1,6 +1,13 @@
 require('dotenv').config();
 
 const config = {
+    host: `http://localhost:${process.env.PORT}`,
+    security: {
+        jwt: {
+            algorithm: 'RS256',
+            maxage: '6h'
+        }
+    },
     database: {
         username: process.env.SQL_USER,
         password: process.env.SQL_PASS,
@@ -8,7 +15,7 @@ const config = {
         host: process.env.SQL_HOST,
         port: process.env.SQL_PORT,
         dialect: process.env.SQL_DIALECT,
-        logging: process.env.SQL_LOG === 'true' ? console.log : false,
+        logging: process.env.NODE_ENV === 'test' ? false : process.env.SQL_LOG === 'true' ? console.log : false,
         pool: {
             max: Number(process.env.SQL_POOL_LIMIT),
             min: 0,
