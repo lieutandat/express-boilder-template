@@ -28,17 +28,18 @@ jobs:
     - name: Make envfile
       uses: SpicyPizza/create-envfile@v1
       with:
-        LOG_LEVEL: "error, info"
-        SQL_HOST: "127.0.0.1"
-        SQL_HOST_READ: "127.0.0.1"
-        SQL_HOST_WRITE: "127.0.0.1"
-        SQL_PORT: "3306"
-        SQL_DB: "db"
-        SQL_USER: "root"
-        SQL_PASS: "pass"
-        SQL_DIALECT: mysql
-        SQL_POOL_LIMIT: 100
-        SQL_LOG: "false"
+        envkey_LOG_LEVEL: "error, info"
+        envkey_SQL_HOST: "127.0.0.1"
+        envkey_SQL_HOST_READ: "127.0.0.1"
+        envkey_SQL_HOST_WRITE: "127.0.0.1"
+        envkey_SQL_PORT: "3306"
+        envkey_SQL_DB: "db"
+        envkey_SQL_USER: "root"
+        envkey_SQL_PASS: "pass"
+        envkey_SQL_DIALECT: mysql
+        envkey_SQL_POOL_LIMIT: 100
+        envkey_SQL_LOG: "false"
+        file_name: .env
     - run: ssh-keygen -t rsa -b 2048 -q -N "12345" -m PEM -f private.key
     - run: cat .env
     - run: npm install
