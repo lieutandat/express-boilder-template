@@ -1,3 +1,5 @@
+https://github.com/lieutandat/express-boilder-template/workflows/Node.js%20CI/badge.svg
+
 # Ready to use Node.js microservice
 
 
