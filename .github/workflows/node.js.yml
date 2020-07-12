@@ -39,6 +39,7 @@ jobs:
         SQL_DIALECT: mysql
         SQL_POOL_LIMIT: 100
         SQL_LOG: "false"
+        file_name: .env
     - run: ssh-keygen -t rsa -b 2048 -q -N "12345" -m PEM -f private.key
     - run: cat .env
     - run: npm install
