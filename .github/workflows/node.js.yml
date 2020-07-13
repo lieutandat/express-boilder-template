@@ -42,10 +42,10 @@ jobs:
         file_name: .env
     - run: ssh-keygen -t rsa -b 2048 -q -N "12345" -m PEM -f private.key
     - run: cat .env
-    - name: Install dependencies
-      run: |
-        pip install --user codecov
-        pipenv sync --dev
+#     - name: Install dependencies
+#       run: |
+#         pip install --user codecov
+#         pipenv sync --dev
     - run: npm install
       
     - run: npm run build --if-present
