@@ -42,7 +42,12 @@ jobs:
         file_name: .env
     - run: ssh-keygen -t rsa -b 2048 -q -N "12345" -m PEM -f private.key
     - run: cat .env
+    - name: Install dependencies
+      run: |
+        pip install --user codecov
+        pipenv sync --dev
     - run: npm install
+      
     - run: npm run build --if-present
     - run: npm run test:cover
 #     - name: Archive production artifacts
@@ -50,8 +55,19 @@ jobs:
 #       with:
 #           name: dist
 #           path: ./
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v1
+#     - name: Archive code coverage results
+#       uses: actions/upload-artifact@v1
+#       with:
+#           name: code-coverage-report
+#           path: coverage/lcov-report/index.html
+#     - name: Collect Coverage Result
+#       run: |
+#         codecov --file coverage/lcov.info --disable search
+    - uses: codecov/codecov-action@v1
       with:
-          name: code-coverage-report
-          path: coverage/lcov-report/index.html
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        file: ./coverage/clover.xml # optional
+        flags: unittests # optional
+        name: codecov.io # optional
+        fail_ci_if_error: true # optional (default = false)
+         
