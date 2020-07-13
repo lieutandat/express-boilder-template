@@ -1,6 +1,7 @@
 
 
 [![Express Logo](https://github.com/lieutandat/express-boilder-template/workflows/Node.js%20CI/badge.svg)]()
+[![codecov](https://codecov.io/gh/lieutandat/express-boilder-template/branch/master/graph/badge.svg)](https://codecov.io/gh/lieutandat/express-boilder-template)
 # Ready to use Node.js microservice
 
 
