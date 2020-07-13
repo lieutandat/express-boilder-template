@@ -10,14 +10,13 @@ const langs = Object.keys(lang);
  * @returns { String }
  */
 function getErrorMessages(errorCode, country) {
-	const key = langs.includes(country) ? country : 'en';
-	return lang[key]
-		? lang[key][errorCode]
-			? lang[key][errorCode]
-			: lang[key].default
-		: lang[key].default;
+  const key = langs.includes(country) ? country : 'en';
+  if (lang[key]) {
+    return lang[key][errorCode] || lang[key].default;
+  }
+  return lang[key].default;
 }
 
 module.exports = {
-	getErrorMessages,
+  getErrorMessages,
 };

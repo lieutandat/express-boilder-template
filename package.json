@@ -8,7 +8,8 @@
     "test:watch": "jest --watch",
     "test:cover": "jest --coverage",
     "start": "nodemon app.js ",
-    "prettier": "prettier --write \"**/*.js\""
+    "prettier": "prettier --write \"**/*.js\"",
+    "lint": "eslint ./ --fix"
   },
   "lint-staged": {
     "*.js": [
@@ -44,6 +45,9 @@
     "winston-daily-rotate-file": "^4.5.0"
   },
   "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
     "sequelize-cli": "^5.5.1",

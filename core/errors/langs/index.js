@@ -1,4 +1,7 @@
+const vn = require('./vn');
+const en = require('./en');
+
 module.exports = {
-	vn: require('./vn'),
-	en: require('./en'),
+  vn,
+  en,
 };
