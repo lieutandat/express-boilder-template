@@ -22,7 +22,7 @@ const checkTokenInBlacklistCallback = async (req, payload, done) => {
 const authorization = expressJwt({
 	secret: JWT_PUBLIC_KEY,
 	algorithm: 'RS256',
-	isRevoked: checkTokenInBlacklistCallback
+	isRevoked: checkTokenInBlacklistCallback,
 });
 
 module.exports = authorization;

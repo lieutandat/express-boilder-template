@@ -2,7 +2,7 @@ const UserRespository = require('../repositories/user.respository');
 const HashPasswordUtils = require('../core/utils/hash-password.utils');
 
 function getUsersService() {
-    return UserRespository.getUsers();
+	return UserRespository.getUsers();
 }
 
 /**
@@ -15,18 +15,18 @@ function getUsersService() {
     }} user 
  */
 async function createUserService(user) {
-    const existingUser = await UserRespository.findUserBy({ email: user.email });
-    if(existingUser) {
-        throw { code: 5100, status: 400, message: `Existing user's email`}
-    }
-    const passwordData = HashPasswordUtils.generateHashPassword(user.password);
-    return UserRespository.createUser({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        hash: passwordData.hash,
-        salt: passwordData.salt
-    });
+	const existingUser = await UserRespository.findUserBy({ email: user.email });
+	if (existingUser) {
+		throw { code: 5100, status: 400, message: `Existing user's email` };
+	}
+	const passwordData = HashPasswordUtils.generateHashPassword(user.password);
+	return UserRespository.createUser({
+		firstName: user.firstName,
+		lastName: user.lastName,
+		email: user.email,
+		hash: passwordData.hash,
+		salt: passwordData.salt,
+	});
 }
 
 /**
@@ -38,20 +38,20 @@ async function createUserService(user) {
 }} user 
 */
 function updateUserService(user) {
-    return UserRespository.updateUser(user);
+	return UserRespository.updateUser(user);
 }
 
 function findUserByNameService(name) {
-    return UserRespository.findUserByName(name);
+	return UserRespository.findUserByName(name);
 }
 
 function deleteUserService({ id, email }) {
-    return UserRespository.deleteUser({ id, email })
+	return UserRespository.deleteUser({ id, email });
 }
 module.exports = {
-    getUsersService,
-    createUserService,
-    updateUserService,
-    findUserByNameService,
-    deleteUserService
-}
+	getUsersService,
+	createUserService,
+	updateUserService,
+	findUserByNameService,
+	deleteUserService,
+};

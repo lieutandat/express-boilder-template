@@ -1,7 +1,7 @@
 const BlogRespository = require('../repositories/blog.respository');
 
 function getBlogsService() {
-    return BlogRespository.getBlogs()
+	return BlogRespository.getBlogs();
 }
 
 /**
@@ -14,15 +14,15 @@ function getBlogsService() {
     }} data 
  */
 function createBlogService(data) {
-    return BlogRespository.createBlog({
-      writer: data.writer,
-      body: data.body,
-      review: data.review,
-      title: data.title
-    })
+	return BlogRespository.createBlog({
+		writer: data.writer,
+		body: data.body,
+		review: data.review,
+		title: data.title,
+	});
 }
 
 module.exports = {
-  getBlogsService,
-  createBlogService
-}
+	getBlogsService,
+	createBlogService,
+};

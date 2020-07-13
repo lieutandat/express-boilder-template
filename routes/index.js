@@ -4,13 +4,12 @@ const userRouter = require('./routers/users.router');
 const blogRouter = require('./routers/blogs.router');
 const authenRouter = require('./routers/authen.router');
 
-router.use('/authen', authenRouter)
+router.use('/authen', authenRouter);
 router.use('/user', userRouter);
 router.use('/blog', blogRouter);
 
 router.get('/', (req, res) => {
-    res.send(`Hello ${new Date()}`);
-})
+	res.send(`Hello ${new Date()}`);
+});
 
-module.exports = router
-
+module.exports = router;

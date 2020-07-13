@@ -1,22 +1,15 @@
 'use strict';
-const { DataTypes } = require('sequelize')
-const {} = require('sequelize')
+const { DataTypes } = require('sequelize');
+const {} = require('sequelize');
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.addColumn(
-      'Users',
-      'activated',
-     {
-       type: DataTypes.BOOLEAN,
-       defaultValue: false
-     }
-    );
-  },
+	up: (queryInterface, Sequelize) => {
+		return queryInterface.addColumn('Users', 'activated', {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		});
+	},
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn(
-      'Users',
-      'activated'
-    );
-  }
+	down: (queryInterface, Sequelize) => {
+		return queryInterface.removeColumn('Users', 'activated');
+	},
 };
